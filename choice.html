@@ -1,44 +1,169 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<title>Sumatif</title>
-<link rel="stylesheet" href="choice.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumatif - Form Pelanggan</title>
+    
+    <style>
+        /* --- BAGIAN CSS --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 300px; /* Diperlebar sedikit agar lebih proporsional */
+            background-color: #F4F2F0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box; /* Agar padding tidak merusak lebar */
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #BAAFA0;
+            border-radius: 8px;
+            font-weight: bold;
+            white-space: pre-line;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 10px;
+            width: 100%;
+            background-color: #CEC5BB;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #b5aaa0;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-<h2>form pelanggan</h2>
+    <h2>Form Pelanggan</h2>
 
-<label>Nama Lengkap:</label>
-<input type="text" id="nama" placeholder="Contoh: Muhammad Rahan">
-<label>kelas:</label>
-<input type="text" id="kelas" placeholder="Contoh:XII IPA 2/11A/7B">
+    <label>Nama Lengkap:</label>
+    <input type="text" id="nama" placeholder="Contoh: Muhammad Raihan">
 
-<label> Pilih Ekstrakurikuler(3 pilihan) </label>
-<label><input type="radio" name="umur" value="10-12">10-12 tahun</label>
-<label><input type="radio" name="umur" value="13-15">13-15 tahun</label>
-<label><input type="radio" name="umur" value="16-18">16-18 tahun</label>
+    <label>Kelas:</label>
+    <input type="text" id="kelas" placeholder="Contoh: XII IPA 2">
 
-<label>jenis kelamin</label>
-<label><input type="radio" name="gender" value="laki-laki">laki-laki</label>
-<label><input type="radio" name="gender" value="perempuan">perempuan</label>
+    <label>Pilih Umur:</label>
+    <label style="font-weight: normal;"><input type="radio" name="umur" value="10-12"> 10-12 tahun</label>
+    <label style="font-weight: normal;"><input type="radio" name="umur" value="13-15"> 13-15 tahun</label>
+    <label style="font-weight: normal;"><input type="radio" name="umur" value="16-18"> 16-18 tahun</label>
 
-<label>tingkatan</label>
-<label><input type="radio" name="tingkat" value="SD">SD</label>
-<label><input type="radio" name="tingkat" value="SMP">SMP</label>
-<label><input type="radio" name="tingkat" value="SMA">SMA</label>
+    <label>Jenis Kelamin:</label>
+    <label style="font-weight: normal;"><input type="radio" name="gender" value="laki-laki"> Laki-laki</label>
+    <label style="font-weight: normal;"><input type="radio" name="gender" value="perempuan"> Perempuan</label>
 
-<label>
-<input type="checkbox" id="setuju"> saya setuju dengan syaratnya
-</label>
+    <label>Tingkatan:</label>
+    <label style="font-weight: normal;"><input type="radio" name="tingkat" value="SD"> SD</label>
+    <label style="font-weight: normal;"><input type="radio" name="tingkat" value="SMP"> SMP</label>
+    <label style="font-weight: normal;"><input type="radio" name="tingkat" value="SMA"> SMA</label>
 
-<button id="tampilkanBTN">tampilkan data</button>
+    <label>
+        <input type="checkbox" id="setuju"> Saya setuju
+    </label>
 
-<div class="result" id="hasil">
-Data muncul disini
+    <button id="tampilkanBTN">Tampilkan Data</button>
+
+    <div class="result" id="hasil">
+        Data muncul disini
+    </div>
 </div>
 
-</div>
+<script>
+    /* --- BAGIAN JAVASCRIPT --- */
+    document.getElementById('tampilkanBTN').onclick = function() {
+        
+        var nama = document.getElementById('nama').value.trim();
+        if (nama === "") {
+            nama = "(nama harus di isi)";
+        }
 
-<script src="choice.js"></script>
+        var kelas = document.getElementById('kelas').value.trim();
+        if (kelas === "") {
+            kelas = "(kelas harus di isi)";
+        }
+
+        var umur = "";
+        var u = document.getElementsByName('umur');
+        for (var i = 0; i < u.length; i++) {
+            if (u[i].checked) {
+                umur = u[i].value;
+                break;
+            }
+        }
+        if (umur === "") {
+            umur = "(pilih umur)";
+        }
+
+        var gender = "";
+        var radios = document.getElementsByName('gender');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                gender = radios[i].value;
+                break;
+            }
+        }
+        if (gender === "") {
+            gender = "(mohon masukan jenis kelamin)";
+        }
+
+        var tingkat = "";
+        var t = document.getElementsByName('tingkat');
+        for (var i = 0; i < t.length; i++) {
+            if (t[i].checked) {
+                tingkat = t[i].value;
+                break;
+            }
+        }
+        if (tingkat === "") {
+            tingkat = "(pilih tingkatan)";
+        }
+
+        var setuju = document.getElementById('setuju').checked ? "ya" : "tidak";
+
+        var hasilText = "Nama: " + nama +
+                        "\nKelas: " + kelas +
+                        "\nUmur: " + umur +
+                        "\nJenis Kelamin: " + gender +
+                        "\nTingkatan: " + tingkat +
+                        "\nSetuju: " + setuju;
+
+        document.getElementById('hasil').innerText = hasilText;
+    }
+</script>
+
 </body>
 </html>
